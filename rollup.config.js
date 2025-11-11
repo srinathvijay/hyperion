@@ -71,6 +71,7 @@ export default defineConfig({
       "hyperionUtil": [
         "hyperion-util/src/ClientSessionID",
         "hyperion-util/src/PersistentData",
+        "hyperion-util/src/SafeGetterSetter",
         "hyperion-util/src/index",
       ],
       "hyperionFlowletCore": [
@@ -88,12 +89,21 @@ export default defineConfig({
         "hyperion-react/src/IReactComponent",
         "hyperion-react/src/index",
       ],
+      // "hyperionAutoLoggingSurface": [
+      //   "hyperion-autologging/src/ALSurface",
+      //   "hyperion-autologging/src/ALSurfaceConsts",
+      //   "hyperion-autologging/src/ALSurfaceEventData",
+      //   "hyperion-autologging/src/ALSurfaceContext",
+      //   "hyperion-autologging/src/ALSurfaceData",
+      //   "hyperion-autologging/src/ALSurfaceUtils",
+      // ],
       "hyperionAutoLogging": [
         "hyperion-autologging/src/ALEventExtension",
         "hyperion-autologging/src/ALCustomEvent",
         "hyperion-autologging/src/ALFlowletManager",
         "hyperion-autologging/src/ALSurface",
         "hyperion-autologging/src/ALSurfaceContext",
+        "hyperion-autologging/src/ALSurfaceEventData",
         "hyperion-autologging/src/ALSurfaceData",
         "hyperion-autologging/src/ALSurfaceUtils",
         "hyperion-autologging/src/ALEventIndex",

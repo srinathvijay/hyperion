@@ -4,16 +4,14 @@
 
 'use strict';
 
-import { ALSurfaceData } from "./ALSurfaceData";
-import { ALFlowletEvent, ALMetadataEvent, Metadata } from "./ALType";
-import * as ALSurfaceContext from "./ALSurfaceContext";
+import { ALMetadataEvent, Metadata } from "./ALType";
 
 export type ALSurfaceProps = Readonly<{
   surface: string;
   metadata?: ALMetadataEvent['metadata'];
   uiEventMetadata?: EventMetadata,
   capability?: ALSurfaceCapability,
-  nodeRef?: React.RefObject<HTMLElement | null | undefined>,
+  nodeRef?: React.RefObject<Element | null | undefined> | null,
 }>;
 
 export type SurfaceComponent = (props: React.PropsWithChildren<
@@ -21,29 +19,12 @@ export type SurfaceComponent = (props: React.PropsWithChildren<
   {
     renderer?: ALSurfaceRenderer;
     // callFlowlet: FlowletType;
-    /** The optional incoming surface that we are re-wrapping via a proxy.
-     * If this is provided,  then we won't emit mutations for this surface as we are
-     * doubly wrapping that surface, for surface attribution purposes.
-     */
-    proxiedContext?: {
-      mainContext: ALSurfaceContext.ALSurfaceContextFilledValue,
-      container?: Element | DocumentFragment
-    }
   }
 >) => React.ReactElement;
 
 export type ALSurfaceRenderer = (node: React.ReactNode) => React.ReactElement;
 export type ALSurfaceHOC = (props: ALSurfaceProps, renderer?: ALSurfaceRenderer) => ALSurfaceRenderer;
-export type ALSurfaceRenderers = {
-  surfaceComponent: SurfaceComponent;
-  surfaceHOComponent: (props: ALSurfaceProps, renderer?: ALSurfaceRenderer) => ALSurfaceRenderer;
-};
 
-
-export type ALChannelSurfaceEvent = Readonly<{
-  al_surface_mount: [ALSurfaceEventData];
-  al_surface_unmount: [ALSurfaceEventData];
-}>;
 
 export interface ALSurfaceCapability {
   /**
@@ -69,22 +50,6 @@ export interface ALSurfaceCapability {
    */
   wrapperStyle?: React.CSSProperties;
 }
-
-export type ALSurfaceEvent = Readonly<{
-    surface: string;
-    surfaceData: ALSurfaceData;
-  }>;
-
-
-export type ALSurfaceEventData =
-  ALMetadataEvent &
-  ALFlowletEvent &
-  ALSurfaceEvent &
-  Readonly<{
-    element: Element;
-    isProxy: boolean;
-    capability: ALSurfaceCapability | null | undefined;
-  }>;
 
 export type WritableEventMetadata = {
   [eventName in keyof DocumentEventMap]?: Metadata
